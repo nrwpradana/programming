@@ -73,7 +73,7 @@ class OpeningAnimation:
             time.sleep(0.5)
 
         # Hold the complete scene
-        time.sleep(3)
+        time.sleep(2)
 
         # Remove all elements
         self.canvas.remove(title)
@@ -106,7 +106,7 @@ class OpeningAnimation:
         line2.setBorderWidth(3)
         self.canvas.add(line2)
 
-        time.sleep(0.8)
+        time.sleep(0.5)
 
         # Create team members information
         team_members = [
@@ -138,7 +138,7 @@ class OpeningAnimation:
             time.sleep(0.7)
 
         # Hold the scene
-        time.sleep(3.5)
+        time.sleep(2)
 
         # Remove all elements
         self.canvas.remove(created)
@@ -195,7 +195,7 @@ class OpeningAnimation:
             time.sleep(0.35)
 
         # Hold final screen
-        time.sleep(3)
+        time.sleep(1)
 
         # Remove all elements
         self.canvas.remove(enjoy)
@@ -355,7 +355,7 @@ class ClosingAnimation:
             corners.append(corner)
 
         # Hold "THE END"
-        time.sleep(3)
+        time.sleep(2)
 
         # Final film flicker
         self.film_flicker()
@@ -376,7 +376,7 @@ class ClosingAnimation:
         thank_you.moveTo(self.width // 2, 260)
         self.canvas.add(thank_you)
 
-        time.sleep(0.8)
+        time.sleep(0.5)
 
         # "for Watching" text
         for_watching = Text("for Watching", 18)
@@ -427,7 +427,7 @@ class ClosingAnimation:
             time.sleep(0.4)
 
         # Hold the message
-        time.sleep(2)
+        time.sleep(1)
 
         # Fade out - remove all elements
         for star in stars:
