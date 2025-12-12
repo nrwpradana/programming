@@ -73,7 +73,7 @@ class OpeningAnimation:
             time.sleep(0.5)
 
         # Hold the complete scene
-        time.sleep(2)
+        time.sleep(1)
 
         # Remove all elements
         self.canvas.remove(title)
@@ -135,10 +135,10 @@ class OpeningAnimation:
             self.canvas.add(member_text)
 
             member_objects.append((bg_rect, member_text))
-            time.sleep(0.7)
+            time.sleep(0.5)
 
         # Hold the scene
-        time.sleep(2)
+        time.sleep(1)
 
         # Remove all elements
         self.canvas.remove(created)
@@ -161,7 +161,7 @@ class OpeningAnimation:
         enjoy.moveTo(self.width // 2, self.height // 2)
         self.canvas.add(enjoy)
 
-        time.sleep(0.8)
+        time.sleep(0.5)
 
         # Add sparkle stars in corners - far from the text
         stars = []
@@ -180,14 +180,14 @@ class OpeningAnimation:
             star.moveTo(pos[0], pos[1])
             self.canvas.add(star)
             stars.append(star)
-            time.sleep(0.15)
+            time.sleep(0.1)
 
         # Pulse effect with color changes
         for _ in range(6):
             enjoy.setFontSize(70)
             for star in stars:
                 star.setFontColor('gold')
-            time.sleep(0.35)
+            time.sleep(0.3)
 
             enjoy.setFontSize(64)
             for star in stars:
@@ -195,7 +195,7 @@ class OpeningAnimation:
             time.sleep(0.35)
 
         # Hold final screen
-        time.sleep(1)
+        time.sleep(0.5)
 
         # Remove all elements
         self.canvas.remove(enjoy)
@@ -430,12 +430,12 @@ class ClosingAnimation:
         time.sleep(1)
 
         # Fade out - remove all elements
-        for star in stars:
-            self.canvas.remove(star)
-        self.canvas.remove(thank_you)
-        self.canvas.remove(for_watching)
+#        for star in stars:
+#            self.canvas.remove(star)
+#        self.canvas.remove(thank_you)
+#        self.canvas.remove(for_watching)
 
-        time.sleep(0.5)
+#        time.sleep(0.5)
 
     def run(self):
         """Main closing animation sequence."""
@@ -1393,7 +1393,7 @@ class Raindrop(Layer):
         self.add(head)
 
 
-def animate_rain(canvas, drops, duration=5):
+def animate_rain(canvas, drops, duration=3):
     start_time = time.time()
     end_time = start_time + duration
     while time.time() < end_time:
@@ -1417,7 +1417,7 @@ class WaterWave(Ellipse):
         self.setDepth(49)
 
 
-def animate_flood(canvas, ark, waves, duration=15, intensity_factor=1.0):
+def animate_flood(canvas, ark, waves, duration=10, intensity_factor=1.0):
     canvas.setAutoRefresh(False)
     start_time = time.time()
     end_time = start_time + duration
@@ -1514,7 +1514,7 @@ def animate_ground_recovery(canvas, ground, duration=10):
     canvas.setAutoRefresh(True)
 
 
-def animate_rain_and_lightning(canvas, duration=15):
+def animate_rain_and_lightning(canvas, duration=10):
     canvas.setAutoRefresh(False)
     start_time = time.time()
     end_time = start_time + duration
@@ -1731,7 +1731,7 @@ class StoryAnimation:
         kid_scale = 0.15
 
 
-        def animate_walk_in(obj, start_x, start_y, end_x, end_y, steps=50, sleep_time=0.2):
+        def animate_walk_in(obj, start_x, start_y, end_x, end_y, steps=50, sleep_time=0.1):
             dx = (end_x - start_x) / steps
             dy = (end_y - start_y) / steps
             obj.move(start_x, start_y)
@@ -1754,13 +1754,13 @@ class StoryAnimation:
         end_x_noah = 520
         end_y_noah = start_y_noah
         animate_walk_in(noah, start_x_noah, start_y_noah, end_x_noah, end_y_noah)
-        time.sleep(5)
+        time.sleep(2)
         text1 = Text("God spoke to Noah: 'Build an ark, for a great flood is coming.'", 18)
         text1.move(500, 100)
         text1.setDepth(10)
         self.canvas.add(text1)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(3)
         self.canvas.remove(text1)
         self.canvas.refresh()
 
@@ -1778,7 +1778,7 @@ class StoryAnimation:
         end_y_kid = start_y_kid
 
         steps = 50
-        sleep_time = 0.2
+        sleep_time = 0.1
         dx_wife = (end_x_wife - start_x_wife) / steps
         dy_wife = (end_y_wife - start_y_wife) / steps
         dx_kid = (end_x_kid - start_x_kid) / steps
@@ -1807,7 +1807,7 @@ class StoryAnimation:
         text2.setDepth(10)
         self.canvas.add(text2)
         self.canvas.refresh()
-        time.sleep(7)
+        time.sleep(3)
         self.canvas.remove(text2)
         self.canvas.refresh()
 
@@ -1827,8 +1827,8 @@ class StoryAnimation:
             ark.scale(1.05)
             current_scale *= 1.05
             self.canvas.refresh()
-            time.sleep(0.5)
-        time.sleep(3)
+            time.sleep(0.1)
+        time.sleep(1)
 
         door = ark.door
         door_center = door.getReferencePoint()
@@ -1838,8 +1838,8 @@ class StoryAnimation:
         for i in range(18):
             door.rotate(-5)
             self.canvas.refresh()
-            time.sleep(0.3)
-        time.sleep(2)
+            time.sleep(0.1)
+        time.sleep(1)
 
         entrance_x = ark_x + (door_center.getX() + dx) * current_scale
         entrance_y = ground_top_y
@@ -1849,7 +1849,7 @@ class StoryAnimation:
         text3.setDepth(10)
         self.canvas.add(text3)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(3)
         self.canvas.remove(text3)
         self.canvas.refresh()
 
@@ -1915,7 +1915,7 @@ class StoryAnimation:
             animal1_set_depth(43)
             animal2_set_depth(43)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.3)
             for _ in range(10):
                 animal1_move(5, 0)
                 animal2_move(5, 0)
@@ -1924,7 +1924,7 @@ class StoryAnimation:
             self.canvas.remove(animal1_layer)
             self.canvas.remove(animal2_layer)
             self.canvas.refresh()
-            time.sleep(1)
+            time.sleep(0.5)
 
 
         goat_start_x = 1100
@@ -1969,7 +1969,7 @@ class StoryAnimation:
             self.canvas.remove(bird1)
             self.canvas.remove(bird2)
             self.canvas.refresh()
-            time.sleep(1)
+            time.sleep(0.5)
 
 
         bird_start_x = 1100
@@ -2003,7 +2003,7 @@ class StoryAnimation:
         text4.setDepth(10)
         self.canvas.add(text4)
         self.canvas.refresh()
-        time.sleep(10)
+        time.sleep(3)
         self.canvas.remove(text4)
         self.canvas.refresh()
 
@@ -2012,12 +2012,11 @@ class StoryAnimation:
         text5.setDepth(10)
         self.canvas.add(text5)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(2)
         self.canvas.remove(text5)
         self.canvas.refresh()
 
-
-        def animate_entry_single(person, steps=100, sleep_time=0.1):
+        def animate_entry_single(person, steps=100, sleep_time=0.05):
             current_x = person.getReferencePoint().getX()
             current_y = person.getReferencePoint().getY()
             dx = (entrance_x - current_x) / steps
@@ -2033,25 +2032,25 @@ class StoryAnimation:
                 time.sleep(sleep_time)
             person.setDepth(43)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.05)
             for _ in range(10):
                 person.move(5, 0)
                 self.canvas.refresh()
                 time.sleep(0.05)
             self.canvas.remove(person)
             self.canvas.refresh()
-            time.sleep(1)
-
+            time.sleep(0.5)
 
         animate_entry_single(noah)
         animate_entry_single(wife)
         animate_entry_single(kid)
 
+
         for i in range(18):
             door.rotate(5)
             self.canvas.refresh()
-            time.sleep(0.3)
-        time.sleep(2)
+            time.sleep(0.1)
+        time.sleep(1)
 
         thunder = ThunderStorm(400, 300, 1.2)
         self.canvas.add(thunder)
@@ -2072,7 +2071,7 @@ class StoryAnimation:
                 self.canvas.add(drop)
                 drops.append(drop)
 
-        animate_rain(self.canvas, drops, 5)
+        animate_rain(self.canvas, drops, 3)
 
         self.canvas.setBackgroundColor("darkgrey")
         self.canvas.remove(sun)
@@ -2088,14 +2087,14 @@ class StoryAnimation:
         self.canvas.add(cloud8_layer)
         self.canvas.refresh()
 
-        animate_rain(self.canvas, drops, 7)
+        animate_rain(self.canvas, drops, 3)
 
         self.canvas.remove(tree2)
         for drop in drops:
             self.canvas.remove(drop)
         self.canvas.refresh()
 
-        animate_ground_flood(self.canvas, ground, duration=10)
+        animate_ground_flood(self.canvas, ground, duration=5)
 
         waves = []
         for i in range(5):
@@ -2107,13 +2106,13 @@ class StoryAnimation:
         flood_text.setDepth(10)
         self.canvas.add(flood_text)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(3)
         self.canvas.remove(flood_text)
         self.canvas.refresh()
 
-        animate_rain_and_lightning(self.canvas, duration=15)
+        animate_rain_and_lightning(self.canvas, duration=10)
 
-        animate_flood(self.canvas, ark, waves, duration=15, intensity_factor=1.0)
+        animate_flood(self.canvas, ark, waves, duration=10, intensity_factor=1.0)
 
         for wave in waves:
             self.canvas.remove(wave)
@@ -2123,11 +2122,11 @@ class StoryAnimation:
         end_text.setDepth(10)
         self.canvas.add(end_text)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(3)
         self.canvas.remove(end_text)
         self.canvas.refresh()
 
-        animate_ground_recovery(self.canvas, ground, duration=10)
+        animate_ground_recovery(self.canvas, ground, duration=5)
 
         self.canvas.setBackgroundColor("light blue")
         self.canvas.refresh()
@@ -2145,11 +2144,11 @@ class StoryAnimation:
         recovery_text.setDepth(10)
         self.canvas.add(recovery_text)
         self.canvas.refresh()
-        time.sleep(5)
+        time.sleep(3)
         self.canvas.remove(recovery_text)
         self.canvas.refresh()
 
-        rainbow = create_rainbow(self.canvas, radius=500, duration=8)
+        rainbow = create_rainbow(self.canvas, radius=500, duration=2)
         rainbow.setDepth(51)
         self.canvas.add(rainbow)
         self.canvas.refresh()
@@ -2160,57 +2159,6 @@ class StoryAnimation:
         self.canvas.add(rainbow_text)
         self.canvas.refresh()
         time.sleep(5)
-        self.canvas.remove(rainbow_text)
-        self.canvas.refresh()
-
-        door.adjustReference(dx, dy)
-        for i in range(18):
-            door.rotate(-5)
-            self.canvas.refresh()
-            time.sleep(0.3)
-        time.sleep(2)
-
-        exit_x = ark_x + (door_center.getX() + dx) * current_scale
-        exit_y = ground_top_y
-
-
-        def animate_exit_single(person, start_x, start_y, end_x, end_y, steps=100, sleep_time=0.1):
-            person.moveTo(start_x, start_y)
-            person.setDepth(40)
-            self.canvas.add(person)
-            self.canvas.refresh()
-            dx = (end_x - start_x) / steps
-            dy = (end_y - start_y) / steps
-            for i in range(steps):
-                person.move(dx, dy)
-                if i % 4 < 2:
-                    person.move(0, -2)
-                else:
-                    person.move(0, 2)
-                self.canvas.refresh()
-                time.sleep(sleep_time)
-            person.setDepth(40)
-            self.canvas.refresh()
-            time.sleep(1)
-
-
-        noah_original_x = 520
-        noah_original_y = ground_top_y - noah_feet_relative * character_scale
-        wife_original_x = 600
-        wife_original_y = ground_top_y - wife_feet_relative * character_scale
-        kid_original_x = 650
-        kid_original_y = ground_top_y - kid_feet_relative * kid_scale
-
-        animate_exit_single(noah, exit_x, exit_y, noah_original_x, noah_original_y, steps=100, sleep_time=0.1)
-        animate_exit_single(wife, exit_x + 80, exit_y, wife_original_x, wife_original_y, steps=100, sleep_time=0.1)
-        animate_exit_single(kid, exit_x + 160, exit_y, kid_original_x, kid_original_y, steps=100, sleep_time=0.1)
-
-        final_text = Text("Noah's family stepped out onto the renewed earth, grateful for God's protection.", 18)
-        final_text.move(500, 100)
-        final_text.setDepth(10)
-        self.canvas.add(final_text)
-        self.canvas.refresh()
-
 
 if __name__ == "__main__":
     canvas = Canvas(1000, 600, 'black', "Noah's Ark Story")
