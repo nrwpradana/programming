@@ -756,7 +756,7 @@ class Giraffe:
             self.layer.add(spot)
 
     def walk(self):
-        self.step += 8
+        self.step += 24
         move = math.sin(math.radians(self.step)) * 4
         self.legs[0].move(0, move)
         self.legs[2].move(0, move)
@@ -893,6 +893,8 @@ class Rabbit:
 class Noah(Layer):
     def __init__(self):
         super().__init__()
+        # Initialize step for walking animation
+        self.step = 0
         skin = Color("peachpuff")
         robe = Color("firebrick")
         head_color = Color("peru")
@@ -1030,21 +1032,31 @@ class Noah(Layer):
         right_hand.setBorderColor(outline)
         right_hand.moveTo(90, 5)
         self.add(right_hand)
-        left_foot = Ellipse(60, 30)
-        left_foot.setFillColor(skin)
-        left_foot.setBorderColor(outline)
-        left_foot.moveTo(-40, 180)
-        self.add(left_foot)
-        right_foot = Ellipse(60, 30)
-        right_foot.setFillColor(skin)
-        right_foot.setBorderColor(outline)
-        right_foot.moveTo(40, 180)
-        self.add(right_foot)
+        # Assign feet for animation
+        self.left_foot = Ellipse(60, 30)
+        self.left_foot.setFillColor(skin)
+        self.left_foot.setBorderColor(outline)
+        self.left_foot.moveTo(-40, 180)
+        self.add(self.left_foot)
+        self.right_foot = Ellipse(60, 30)
+        self.right_foot.setFillColor(skin)
+        self.right_foot.setBorderColor(outline)
+        self.right_foot.moveTo(40, 180)
+        self.add(self.right_foot)
+
+    # Method to animate legs movement
+    def walk(self):
+        self.step += 24
+        move = math.sin(math.radians(self.step)) * 4 # Step amplitude
+        self.left_foot.move(0, move)
+        self.right_foot.move(0, -move)
 
 # Define Wife class as a Layer for character composition
 class Wife(Layer):
     def __init__(self):
         super().__init__()
+        # Initialize step for walking animation
+        self.step = 0
         skin = Color("peachpuff")
         robe_color = Color("plum")
         outline = Color("saddlebrown")
@@ -1160,21 +1172,31 @@ class Wife(Layer):
         handR.setBorderColor(outline)
         handR.moveTo(85, -20)
         self.add(handR)
-        footL = Ellipse(60, 30)
-        footL.setFillColor(skin)
-        footL.setBorderColor(outline)
-        footL.moveTo(-35, 180)
-        self.add(footL)
-        footR = Ellipse(60, 30)
-        footR.setFillColor(skin)
-        footR.setBorderColor(outline)
-        footR.moveTo(35, 180)
-        self.add(footR)
+        # Assign feet for animation
+        self.left_foot = Ellipse(60, 30)
+        self.left_foot.setFillColor(skin)
+        self.left_foot.setBorderColor(outline)
+        self.left_foot.moveTo(-35, 180)
+        self.add(self.left_foot)
+        self.right_foot = Ellipse(60, 30)
+        self.right_foot.setFillColor(skin)
+        self.right_foot.setBorderColor(outline)
+        self.right_foot.moveTo(35, 180)
+        self.add(self.right_foot)
+
+    # Method to animate legs movement
+    def walk(self):
+        self.step += 24 # Step speed
+        move = math.sin(math.radians(self.step)) * 4
+        self.left_foot.move(0, move)
+        self.right_foot.move(0, -move)
 
 # Define Kid class as a Layer for child character
 class Kid(Layer):
     def __init__(self):
         super().__init__()
+        # Initialize step for walking animation
+        self.step = 0
         skin = Color("peachpuff")
         hair_color = Color("sienna")
         tunic_color = Color("peru")
@@ -1260,22 +1282,29 @@ class Kid(Layer):
         legR.setBorderColor(outline)
         legR.moveTo(25, 80)
         self.add(legR)
-        footL = Ellipse(55, 25)
-        footL.setFillColor(skin)
-        footL.setBorderColor(outline)
-        footL.moveTo(-25, 135)
-        self.add(footL)
-        footR = Ellipse(55, 25)
-        footR.setFillColor(skin)
-        footR.setBorderColor(outline)
-        footR.moveTo(25, 135)
-        self.add(footR)
+        # Assign feet for animation
+        self.left_foot = Ellipse(55, 25)
+        self.left_foot.setFillColor(skin)
+        self.left_foot.setBorderColor(outline)
+        self.left_foot.moveTo(-25, 135)
+        self.add(self.left_foot)
+        self.right_foot = Ellipse(55, 25)
+        self.right_foot.setFillColor(skin)
+        self.right_foot.setBorderColor(outline)
+        self.right_foot.moveTo(25, 135)
+        self.add(self.right_foot)
         for dx in (-25, 25):
             strap = Rectangle(50, 6)
             strap.setFillColor("saddlebrown")
             strap.setBorderColor("saddlebrown")
             strap.moveTo(dx, 130)
             self.add(strap)
+    # Method to animate legs movement
+    def walk(self):
+        self.step += 24 # Step speed
+        move = math.sin(math.radians(self.step)) * 4
+        self.left_foot.move(0, move)
+        self.right_foot.move(0, -move)
 
 # Define Ark class as a Layer for the boat structure
 class Ark(Layer):
@@ -1740,6 +1769,8 @@ class StoryAnimation:
             self.canvas.refresh()
             for i in range(steps):
                 obj.move(dx, dy)
+                # Call walk method to animate legs
+                obj.walk()
                 if i % 4 < 2:
                     obj.move(0, -2)
                 else:
@@ -1793,6 +1824,9 @@ class StoryAnimation:
         for i in range(steps):
             wife.move(dx_wife, dy_wife)
             kid.move(dx_kid, dy_kid)
+            # Call walk for wife and kid
+            wife.walk()
+            kid.walk()
             if i % 4 < 2:
                 wife.move(0, -2)
                 kid.move(0, -2)
@@ -1854,7 +1888,7 @@ class StoryAnimation:
         self.canvas.refresh()
 
 
-        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.05):
+        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.1):
             if isinstance(animal1, Layer):
                 animal1_layer = animal1
                 def animal1_move(dx, dy):
@@ -2016,7 +2050,7 @@ class StoryAnimation:
         self.canvas.remove(text5)
         self.canvas.refresh()
 
-        def animate_entry_single(person, steps=100, sleep_time=0.01):
+        def animate_entry_single(person, steps=100, sleep_time=0.03):
             current_x = person.getReferencePoint().getX()
             current_y = person.getReferencePoint().getY()
             dx = (entrance_x - current_x) / steps
@@ -2024,6 +2058,8 @@ class StoryAnimation:
             person.setDepth(41)
             for i in range(steps):
                 person.move(dx, dy)
+                # Call walk method to animate legs
+                person.walk()
                 if i % 4 < 2:
                     person.move(0, -2)
                 else:
@@ -2094,7 +2130,7 @@ class StoryAnimation:
             self.canvas.remove(drop)
         self.canvas.refresh()
 
-        animate_ground_flood(self.canvas, ground, duration=3)
+        animate_ground_flood(self.canvas, ground, duration=5)
 
         waves = []
         for i in range(5):
@@ -2126,7 +2162,7 @@ class StoryAnimation:
         self.canvas.remove(end_text)
         self.canvas.refresh()
 
-        animate_ground_recovery(self.canvas, ground, duration=3)
+        animate_ground_recovery(self.canvas, ground, duration=5)
 
         self.canvas.setBackgroundColor("light blue")
         self.canvas.refresh()
