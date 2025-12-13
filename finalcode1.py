@@ -448,7 +448,7 @@ class ClosingAnimation:
         self.film_flicker()  # Transition
         self.scene3_thank_you()  # Thank you for watching
 
-
+# Define Tree class as a Layer for composing tree elements
 class Tree(Layer):
     def __init__(self, position=(170, 600), trunk_width=30, trunk_height=250, leaves_size=(150, 100)):
         super().__init__()
@@ -483,7 +483,7 @@ class Tree(Layer):
         self.add(leaves1)
         self.setDepth(40)
 
-
+# Function to add sun rays around a sun object
 def add_sun_rays(center_x, center_y, radius, num_rays=8, ray_length=30, color="orange"):
     rays = []
     for i in range(num_rays):
@@ -500,7 +500,7 @@ def add_sun_rays(center_x, center_y, radius, num_rays=8, ray_length=30, color="o
         rays.append(ray)
     return rays
 
-
+# Define Mountain class inheriting from Polygon
 class Mountain(Polygon):
     def __init__(self, base_width, height, position, color="brown"):
         points = [
@@ -513,7 +513,7 @@ class Mountain(Polygon):
         self.setBorderColor("black")
         self.setDepth(45)
 
-
+# Define Goat class as a Layer for animal animation
 class Goat(Layer):
     def __init__(self, color="white", x=0, y=0):
         super().__init__()
@@ -580,7 +580,7 @@ class Goat(Layer):
         self.add(tail)
         self.moveTo(x, y)
 
-
+# Define Chicken class as a Layer for animal animation
 class Chicken(Layer):
     def __init__(self, color="yellow", x=0, y=0):
         super().__init__()
@@ -625,7 +625,7 @@ class Chicken(Layer):
         self.add(tail)
         self.moveTo(x, y)
 
-
+# Define Bird class as a Layer for flying animal animation
 class Bird(Layer):
     def __init__(self, color="blue", x=0, y=0):
         super().__init__()
@@ -652,7 +652,7 @@ class Bird(Layer):
         self.add(wing1)
         self.moveTo(x, y)
 
-
+# Define Giraffe class with walking and neck swaying animations
 class Giraffe:
     def __init__(self, x, y):
         self.layer = Layer()
@@ -768,7 +768,7 @@ class Giraffe:
         self.neck.move(sway, 0)
         self.head_layer.move(sway, 0)
 
-
+# Define Elephant class with walking and trunk swinging animations
 class Elephant:
     def __init__(self, x, y):
         self.layer = Layer()
@@ -846,7 +846,7 @@ class Elephant:
         sway = math.sin(math.radians(self.trunk_angle)) * 3
         self.trunk.move(sway, 0)
 
-
+# Define Rabbit class with hopping animation
 class Rabbit:
     def __init__(self, x, y):
         self.layer = Layer()
@@ -889,7 +889,7 @@ class Rabbit:
         hop_height = abs(math.sin(math.radians(self.hop_phase))) * 10
         self.move_to(self.x, self.ground_y - hop_height)
 
-
+# Define Noah class as a Layer for character composition
 class Noah(Layer):
     def __init__(self):
         super().__init__()
@@ -1041,7 +1041,7 @@ class Noah(Layer):
         right_foot.moveTo(40, 180)
         self.add(right_foot)
 
-
+# Define Wife class as a Layer for character composition
 class Wife(Layer):
     def __init__(self):
         super().__init__()
@@ -1171,7 +1171,7 @@ class Wife(Layer):
         footR.moveTo(35, 180)
         self.add(footR)
 
-
+# Define Kid class as a Layer for child character
 class Kid(Layer):
     def __init__(self):
         super().__init__()
@@ -1277,7 +1277,7 @@ class Kid(Layer):
             strap.moveTo(dx, 130)
             self.add(strap)
 
-
+# Define Ark class as a Layer for the boat structure
 class Ark(Layer):
     def __init__(self):
         super().__init__()
@@ -1331,7 +1331,7 @@ class Ark(Layer):
         self.door.setBorderWidth(5)
         self.add(self.door)
 
-
+# Define ThunderStorm class as a Layer for lightning effects
 class ThunderStorm(Layer):
     def __init__(self, x, y, size=1.0):
         super().__init__()
@@ -1359,7 +1359,7 @@ class ThunderStorm(Layer):
             lightning.move(x + i * 70 * size, y)
             self.add(lightning)
 
-
+# Function to animate thunder blinking effect
 def animate_thunder_blink(canvas, storm_layer, duration=5, blink_rate=0.3):
     canvas.setAutoRefresh(False)
     start_time = time.time()
@@ -1377,7 +1377,7 @@ def animate_thunder_blink(canvas, storm_layer, duration=5, blink_rate=0.3):
         time.sleep(blink_rate / 2)
     canvas.setAutoRefresh(True)
 
-
+# Define Raindrop class as a Layer for rain animation
 class Raindrop(Layer):
     def __init__(self, x, y):
         super().__init__()
@@ -1392,7 +1392,7 @@ class Raindrop(Layer):
         self.add(stem)
         self.add(head)
 
-
+# Function to animate falling rain
 def animate_rain(canvas, drops, duration=3):
     start_time = time.time()
     end_time = start_time + duration
@@ -1407,7 +1407,7 @@ def animate_rain(canvas, drops, duration=3):
         canvas.refresh()
         time.sleep(0.05)
 
-
+# Define WaterWave class inheriting from Ellipse for flood waves
 class WaterWave(Ellipse):
     def __init__(self, y_offset, wave_intensity=1.0):
         super().__init__(1000, 20 * wave_intensity, Point(500, 500 + y_offset))
@@ -1416,7 +1416,7 @@ class WaterWave(Ellipse):
         self.setBorderWidth(0)
         self.setDepth(49)
 
-
+# Function to animate flood with waves and ark movement
 def animate_flood(canvas, ark, waves, duration=10, intensity_factor=1.0):
     canvas.setAutoRefresh(False)
     start_time = time.time()
@@ -1442,7 +1442,7 @@ def animate_flood(canvas, ark, waves, duration=10, intensity_factor=1.0):
         time.sleep(frame_duration)
     canvas.setAutoRefresh(True)
 
-
+# Function to create continuous rain effect across the canvas
 def create_continuous_rain_effect(canvas, duration=15):
     all_drops = []
     for set_num in range(3):
@@ -1475,7 +1475,7 @@ def create_continuous_rain_effect(canvas, duration=15):
         time.sleep(0.05)
     canvas.setAutoRefresh(True)
 
-
+# Function to animate ground flooding by changing color
 def animate_ground_flood(canvas, ground, duration=10):
     canvas.setAutoRefresh(False)
     steps = 100
@@ -1494,7 +1494,7 @@ def animate_ground_flood(canvas, ground, duration=10):
         time.sleep(step_duration)
     canvas.setAutoRefresh(True)
 
-
+# Function to animate ground recovery by changing color back
 def animate_ground_recovery(canvas, ground, duration=10):
     canvas.setAutoRefresh(False)
     steps = 100
@@ -1513,7 +1513,7 @@ def animate_ground_recovery(canvas, ground, duration=10):
         time.sleep(step_duration)
     canvas.setAutoRefresh(True)
 
-
+# Function to animate rain and lightning together
 def animate_rain_and_lightning(canvas, duration=10):
     canvas.setAutoRefresh(False)
     start_time = time.time()
@@ -1570,7 +1570,7 @@ def animate_rain_and_lightning(canvas, duration=10):
         canvas.remove(drop)
     canvas.setAutoRefresh(True)
 
-
+# Function to create and animate a rainbow arc
 def create_rainbow(canvas, center_x=500, center_y=600, radius=500,
                    colors=['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink'], duration=5):
     rainbow_layer = Layer()
@@ -1609,7 +1609,7 @@ def create_rainbow(canvas, center_x=500, center_y=600, radius=500,
     canvas.setAutoRefresh(True)
     return rainbow_layer
 
-
+# Define StoryAnimation class to run the main story sequence
 class StoryAnimation:
     def __init__(self, canvas):
         self.canvas = canvas
@@ -1854,7 +1854,7 @@ class StoryAnimation:
         self.canvas.refresh()
 
 
-        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.1):
+        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.05):
             if isinstance(animal1, Layer):
                 animal1_layer = animal1
                 def animal1_move(dx, dy):
@@ -1924,7 +1924,7 @@ class StoryAnimation:
             self.canvas.remove(animal1_layer)
             self.canvas.remove(animal2_layer)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.3)
 
 
         goat_start_x = 1100
@@ -1940,7 +1940,7 @@ class StoryAnimation:
         animate_entry(chicken1, chicken2, chicken_start_x, chicken_start_y, chicken_start_y + 10)
 
 
-        def animate_fly_entry(bird1, bird2, start_x, start_y1, start_y2, steps=100, sleep_time=0.1):
+        def animate_fly_entry(bird1, bird2, start_x, start_y1, start_y2, steps=100, sleep_time=0.05):
             bird1.move(start_x, start_y1)
             bird2.move(start_x + 50, start_y2)
             bird1.setDepth(41)
@@ -1960,7 +1960,7 @@ class StoryAnimation:
             bird1.setDepth(43)
             bird2.setDepth(43)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.1)
             for _ in range(10):
                 bird1.move(5, 0)
                 bird2.move(5, 0)
@@ -1969,7 +1969,7 @@ class StoryAnimation:
             self.canvas.remove(bird1)
             self.canvas.remove(bird2)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.1)
 
 
         bird_start_x = 1100
@@ -2003,7 +2003,7 @@ class StoryAnimation:
         text4.setDepth(10)
         self.canvas.add(text4)
         self.canvas.refresh()
-        time.sleep(3)
+        time.sleep(2)
         self.canvas.remove(text4)
         self.canvas.refresh()
 
@@ -2016,7 +2016,7 @@ class StoryAnimation:
         self.canvas.remove(text5)
         self.canvas.refresh()
 
-        def animate_entry_single(person, steps=100, sleep_time=0.05):
+        def animate_entry_single(person, steps=100, sleep_time=0.01):
             current_x = person.getReferencePoint().getX()
             current_y = person.getReferencePoint().getY()
             dx = (entrance_x - current_x) / steps
@@ -2039,7 +2039,7 @@ class StoryAnimation:
                 time.sleep(0.05)
             self.canvas.remove(person)
             self.canvas.refresh()
-            time.sleep(0.5)
+            time.sleep(0.05)
 
         animate_entry_single(noah)
         animate_entry_single(wife)
@@ -2050,11 +2050,11 @@ class StoryAnimation:
             door.rotate(5)
             self.canvas.refresh()
             time.sleep(0.1)
-        time.sleep(1)
+        time.sleep(0.5)
 
         thunder = ThunderStorm(400, 300, 1.2)
         self.canvas.add(thunder)
-        animate_thunder_blink(self.canvas, thunder, 5, 0.3)
+        animate_thunder_blink(self.canvas, thunder, 3, 0.3)
         self.canvas.remove(thunder)
         self.canvas.refresh()
 
@@ -2094,7 +2094,7 @@ class StoryAnimation:
             self.canvas.remove(drop)
         self.canvas.refresh()
 
-        animate_ground_flood(self.canvas, ground, duration=5)
+        animate_ground_flood(self.canvas, ground, duration=3)
 
         waves = []
         for i in range(5):
@@ -2106,13 +2106,13 @@ class StoryAnimation:
         flood_text.setDepth(10)
         self.canvas.add(flood_text)
         self.canvas.refresh()
-        time.sleep(3)
+        time.sleep(2)
         self.canvas.remove(flood_text)
         self.canvas.refresh()
 
-        animate_rain_and_lightning(self.canvas, duration=10)
+        animate_rain_and_lightning(self.canvas, duration=8)
 
-        animate_flood(self.canvas, ark, waves, duration=10, intensity_factor=1.0)
+        animate_flood(self.canvas, ark, waves, duration=8, intensity_factor=1.0)
 
         for wave in waves:
             self.canvas.remove(wave)
@@ -2122,11 +2122,11 @@ class StoryAnimation:
         end_text.setDepth(10)
         self.canvas.add(end_text)
         self.canvas.refresh()
-        time.sleep(3)
+        time.sleep(2)
         self.canvas.remove(end_text)
         self.canvas.refresh()
 
-        animate_ground_recovery(self.canvas, ground, duration=5)
+        animate_ground_recovery(self.canvas, ground, duration=3)
 
         self.canvas.setBackgroundColor("light blue")
         self.canvas.refresh()
@@ -2144,7 +2144,7 @@ class StoryAnimation:
         recovery_text.setDepth(10)
         self.canvas.add(recovery_text)
         self.canvas.refresh()
-        time.sleep(3)
+        time.sleep(2)
         self.canvas.remove(recovery_text)
         self.canvas.refresh()
 
@@ -2160,6 +2160,7 @@ class StoryAnimation:
         self.canvas.refresh()
         time.sleep(5)
 
+# Main execution block to run the full animation
 if __name__ == "__main__":
     canvas = Canvas(1000, 600, 'black', "Noah's Ark Story")
 
