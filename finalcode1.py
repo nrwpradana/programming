@@ -155,7 +155,7 @@ class OpeningAnimation:
     def scene3_enjoy(self):
         """Scene 3: Enjoy the video (35-55 seconds)."""
         # Create main message (no circle behind)
-        enjoy = Text("Enjoy the Video", 18)
+        enjoy = Text("Enjoy the Animation", 18)
         enjoy.setFontColor('white')
         enjoy.setFontSize(64)
         enjoy.moveTo(self.width // 2, self.height // 2)
@@ -180,19 +180,19 @@ class OpeningAnimation:
             star.moveTo(pos[0], pos[1])
             self.canvas.add(star)
             stars.append(star)
-            time.sleep(0.1)
+            time.sleep(0.03)
 
         # Pulse effect with color changes
         for _ in range(6):
             enjoy.setFontSize(70)
             for star in stars:
                 star.setFontColor('gold')
-            time.sleep(0.3)
+            time.sleep(0.25)
 
             enjoy.setFontSize(64)
             for star in stars:
                 star.setFontColor('yellow')
-            time.sleep(0.35)
+            time.sleep(0.25)
 
         # Hold final screen
         time.sleep(0.5)
@@ -203,88 +203,8 @@ class OpeningAnimation:
             self.canvas.remove(star)
         time.sleep(0.3)
 
-    def scene4_countdown(self):
-        """Scene 4: Film Countdown (55-60 seconds)."""
-        # Countdown numbers
-        for count in [3, 2, 1]:
-            # Create outer circle (film reel)
-            outer_circle = Circle(200, Point(self.width // 2, self.height // 2))
-            outer_circle.setFillColor('white')
-            outer_circle.setBorderColor('black')
-            outer_circle.setBorderWidth(8)
-            self.canvas.add(outer_circle)
-
-            # Create inner circle
-            inner_circle = Circle(150, Point(self.width // 2, self.height // 2))
-            inner_circle.setFillColor('black')
-            inner_circle.setBorderWidth(0)
-            self.canvas.add(inner_circle)
-
-            # Create countdown number
-            number = Text(str(count), 18)
-            number.setFontColor('white')
-            number.setFontSize(120)
-            number.moveTo(self.width // 2, self.height // 2)
-            self.canvas.add(number)
-
-            # Create corner markers (film frame corners)
-            corner_size = 30
-            corners = []
-            corner_positions = [
-                (350, 150), (650, 150),  # Top corners
-                (350, 450), (650, 450)  # Bottom corners
-            ]
-
-            for x, y in corner_positions:
-                corner = Rectangle(corner_size, corner_size, Point(x, y))
-                corner.setFillColor('white')
-                corner.setBorderWidth(0)
-                self.canvas.add(corner)
-                corners.append(corner)
-
-            # Add film scratches (vertical lines)
-            scratch1 = Path(Point(200, 100), Point(200, 500))
-            scratch1.setBorderColor('gray')
-            scratch1.setBorderWidth(2)
-            self.canvas.add(scratch1)
-
-            scratch2 = Path(Point(800, 100), Point(800, 500))
-            scratch2.setBorderColor('gray')
-            scratch2.setBorderWidth(2)
-            self.canvas.add(scratch2)
-
-            # Hold for 1 second
-            time.sleep(1)
-
-            # Remove all countdown elements
-            self.canvas.remove(outer_circle)
-            self.canvas.remove(inner_circle)
-            self.canvas.remove(number)
-            for corner in corners:
-                self.canvas.remove(corner)
-            self.canvas.remove(scratch1)
-            self.canvas.remove(scratch2)
-
-            # Brief black screen
-            time.sleep(0.2)
-
-        # Final flicker before video starts
-        self.film_flicker()
-
     def run(self):
         """Main animation sequence."""
-        print("=" * 60)
-        print("NOAH'S ARK STORY - OPENING ANIMATION")
-        print("=" * 60)
-        print("Duration: ~60 seconds")
-        print("Scenes:")
-        print("  1. The Noah's Ark Story (0-20s)")
-        print("  2. Created by Team (20-35s)")
-        print("  3. Enjoy the Video (35-55s)")
-        print("  4. Film Countdown 3-2-1 (55-60s)")
-        print("=" * 60)
-        print("\nStarting animation...\n")
-
         # Run all scenes with film flicker transitions
         self.scene1()  # Noah's Ark Story with description
         self.film_flicker()  # Transition effect
@@ -294,13 +214,9 @@ class OpeningAnimation:
 
         self.scene3_enjoy()  # Enjoy the video (no circle, stars in corners)
 
-        self.scene4_countdown()  # Film countdown 3-2-1
-
-        print("\n" + "=" * 60)
         print("Animation complete! The video is starting now...")
-        print("=" * 60)
 
-
+# Class for Closing Animation after story
 class ClosingAnimation:
     def __init__(self, canvas):
         """Initialize the closing animation with canvas."""
@@ -404,7 +320,7 @@ class ClosingAnimation:
             star.moveTo(pos[0], pos[1])
             self.canvas.add(star)
             stars.append(star)
-            time.sleep(0.12)
+            time.sleep(0.1)
 
         # Animated pulse effect
         for _ in range(6):
@@ -415,7 +331,7 @@ class ClosingAnimation:
             for star in stars[::2]:  # Alternate stars
                 star.setFontColor('gold')
 
-            time.sleep(0.4)
+            time.sleep(0.2)
 
             # Pulse down
             thank_you.setFontSize(68)
@@ -424,18 +340,18 @@ class ClosingAnimation:
             for star in stars[::2]:
                 star.setFontColor('yellow')
 
-            time.sleep(0.4)
+            time.sleep(0.2)
 
         # Hold the message
-        time.sleep(1)
+        time.sleep(2)
 
         # Fade out - remove all elements
-#        for star in stars:
-#            self.canvas.remove(star)
-#        self.canvas.remove(thank_you)
-#        self.canvas.remove(for_watching)
+        for star in stars:
+            self.canvas.remove(star)
+        self.canvas.remove(thank_you)
+        self.canvas.remove(for_watching)
 
-#        time.sleep(0.5)
+        time.sleep(0.5)
 
     def run(self):
         """Main closing animation sequence."""
