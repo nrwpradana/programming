@@ -20,9 +20,9 @@ class OpeningAnimation:
         # Quick flickers
         for _ in range(3):
             self.canvas.add(flicker)
-            time.sleep(0.05)
+            time.sleep(0.03)
             self.canvas.remove(flicker)
-            time.sleep(0.05)
+            time.sleep(0.03)
 
     def scene1(self):
         """Scene 1: Noah's Ark Story with Description (0-20 seconds)."""
@@ -82,7 +82,7 @@ class OpeningAnimation:
             self.canvas.remove(desc)
 
         # Keep dark slate gray background for scene 2
-        time.sleep(0.3)
+        time.sleep(0.2)
 
     def scene2(self):
         """Scene 2: Created by Team (20-35 seconds)."""
@@ -208,13 +208,9 @@ class OpeningAnimation:
         # Run all scenes with film flicker transitions
         self.scene1()  # Noah's Ark Story with description
         self.film_flicker()  # Transition effect
-
         self.scene2()  # Created by team members
         self.film_flicker()  # Transition effect
-
         self.scene3_enjoy()  # Enjoy the video (no circle, stars in corners)
-
-        print("Animation complete! The video is starting now...")
 
 # Class for Closing Animation after story
 class ClosingAnimation:
@@ -244,7 +240,7 @@ class ClosingAnimation:
         # Just a pause to simulate video ending
         time.sleep(1)
         self.film_flicker()
-        time.sleep(0.5)
+        time.sleep(0.3)
 
     def scene2_film_end(self):
         """Classic film ending with THE END."""
@@ -271,7 +267,7 @@ class ClosingAnimation:
             corners.append(corner)
 
         # Hold "THE END"
-        time.sleep(2)
+        time.sleep(1)
 
         # Final film flicker
         self.film_flicker()
@@ -283,76 +279,6 @@ class ClosingAnimation:
 
         time.sleep(0.5)
 
-    def scene3_thank_you(self):
-        """Thank you message with elegant animation - no borders, no circles."""
-        # Main thank you message
-        thank_you = Text("Thank You", 18)
-        thank_you.setFontColor('white')
-        thank_you.setFontSize(68)
-        thank_you.moveTo(self.width // 2, 260)
-        self.canvas.add(thank_you)
-
-        time.sleep(0.5)
-
-        # "for Watching" text
-        for_watching = Text("for Watching", 18)
-        for_watching.setFontColor('gold')
-        for_watching.setFontSize(52)
-        for_watching.moveTo(self.width // 2, 340)
-        self.canvas.add(for_watching)
-
-        time.sleep(1)
-
-        # Add floating sparkles around the text
-        stars = []
-        star_positions = [
-            (250, 200), (750, 200),  # Top sides
-            (250, 400), (750, 400),  # Bottom sides
-            (180, 300), (820, 300),  # Far sides
-            (350, 180), (650, 180),  # Upper corners
-            (350, 420), (650, 420)  # Lower corners
-        ]
-
-        for pos in star_positions:
-            star = Text("✨", 18)
-            star.setFontColor('yellow')
-            star.setFontSize(32)
-            star.moveTo(pos[0], pos[1])
-            self.canvas.add(star)
-            stars.append(star)
-            time.sleep(0.1)
-
-        # Animated pulse effect
-        for _ in range(6):
-            # Pulse up
-            thank_you.setFontSize(72)
-            for_watching.setFontSize(56)
-
-            for star in stars[::2]:  # Alternate stars
-                star.setFontColor('gold')
-
-            time.sleep(0.2)
-
-            # Pulse down
-            thank_you.setFontSize(68)
-            for_watching.setFontSize(52)
-
-            for star in stars[::2]:
-                star.setFontColor('yellow')
-
-            time.sleep(0.2)
-
-        # Hold the message
-        time.sleep(2)
-
-        # Fade out - remove all elements
-        for star in stars:
-            self.canvas.remove(star)
-        self.canvas.remove(thank_you)
-        self.canvas.remove(for_watching)
-
-        time.sleep(0.5)
-
     def run(self):
         """Main closing animation sequence."""
         self.canvas.clear()
@@ -361,8 +287,6 @@ class ClosingAnimation:
         # Run all closing scenes
         self.scene1_fade_in()  # Transition from video
         self.scene2_film_end()  # The End
-        self.film_flicker()  # Transition
-        self.scene3_thank_you()  # Thank you for watching
 
 # Define Tree class as a Layer for composing tree elements
 class Tree(Layer):
@@ -1485,7 +1409,7 @@ def animate_rain_and_lightning(canvas, duration=10):
     frame_duration = 1.0 / frame_rate
     last_lightning_time = time.time()
     lightning_active = False
-    lightning_duration = 0.2
+    lightning_duration = 0.1
     lightning_timer = 0
     while time.time() < end_time:
         current_time = time.time()
@@ -1804,7 +1728,7 @@ class StoryAnimation:
         self.canvas.refresh()
 
 
-        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.1):
+        def animate_entry(animal1, animal2, start_x, start_y1, start_y2, steps=100, sleep_time=0.08):
             if isinstance(animal1, Layer):
                 animal1_layer = animal1
                 def animal1_move(dx, dy):
@@ -1865,7 +1789,7 @@ class StoryAnimation:
             animal1_set_depth(43)
             animal2_set_depth(43)
             self.canvas.refresh()
-            time.sleep(0.3)
+            time.sleep(0.2)
             for _ in range(10):
                 animal1_move(5, 0)
                 animal2_move(5, 0)
@@ -1874,7 +1798,7 @@ class StoryAnimation:
             self.canvas.remove(animal1_layer)
             self.canvas.remove(animal2_layer)
             self.canvas.refresh()
-            time.sleep(0.3)
+            time.sleep(0.2)
 
 
         goat_start_x = 1100
@@ -1890,7 +1814,7 @@ class StoryAnimation:
         animate_entry(chicken1, chicken2, chicken_start_x, chicken_start_y, chicken_start_y + 10)
 
 
-        def animate_fly_entry(bird1, bird2, start_x, start_y1, start_y2, steps=100, sleep_time=0.05):
+        def animate_fly_entry(bird1, bird2, start_x, start_y1, start_y2, steps=100, sleep_time=0.08):
             bird1.move(start_x, start_y1)
             bird2.move(start_x + 50, start_y2)
             bird1.setDepth(41)
@@ -1910,16 +1834,16 @@ class StoryAnimation:
             bird1.setDepth(43)
             bird2.setDepth(43)
             self.canvas.refresh()
-            time.sleep(0.1)
+            time.sleep(0.2)
             for _ in range(10):
                 bird1.move(5, 0)
                 bird2.move(5, 0)
                 self.canvas.refresh()
-                time.sleep(0.05)
+                time.sleep(0.1)
             self.canvas.remove(bird1)
             self.canvas.remove(bird2)
             self.canvas.refresh()
-            time.sleep(0.1)
+            time.sleep(0.2)
 
 
         bird_start_x = 1100
@@ -2046,7 +1970,7 @@ class StoryAnimation:
             self.canvas.remove(drop)
         self.canvas.refresh()
 
-        animate_ground_flood(self.canvas, ground, duration=5)
+        animate_ground_flood(self.canvas, ground, duration=4)
 
         waves = []
         for i in range(5):
@@ -2078,7 +2002,7 @@ class StoryAnimation:
         self.canvas.remove(end_text)
         self.canvas.refresh()
 
-        animate_ground_recovery(self.canvas, ground, duration=5)
+        animate_ground_recovery(self.canvas, ground, duration=3)
 
         self.canvas.setBackgroundColor("light blue")
         self.canvas.refresh()
@@ -2116,6 +2040,7 @@ class StoryAnimation:
 if __name__ == "__main__":
     canvas = Canvas(1000, 600, 'black', "Noah's Ark Story")
 
+    start_time = time.time()  # Record start time
     open_anim = OpeningAnimation(canvas)
     open_anim.run()
 
@@ -2126,5 +2051,10 @@ if __name__ == "__main__":
     close_anim = ClosingAnimation(canvas)
     close_anim.run()
 
+    end_time = time.time()  # Record end time
+    elapsed_time = end_time - start_time  # Calculate elapsed time
+    print(f"The animation ran for {elapsed_time:.2f} seconds.")  # Print the duration
+
     canvas.wait()
     canvas.close()
+
